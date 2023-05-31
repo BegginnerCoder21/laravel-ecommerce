@@ -1,21 +1,21 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Product;
 
 class CartRepository
 {
-    public function add(Product $product)
+    public function add(Product $product): int
     {
-        
-        session(auth()->user()->id)->add(array(
 
+        \Cart::session(auth()->user()->id)->add(array(
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
             'quantity' => 1,
             'attributes' => array(),
-            'associateModel' => $product
+            'associatedModel' => $product
         ));
 
         return $this->count();
@@ -23,7 +23,7 @@ class CartRepository
 
     public function content()
     {
-        return session(auth()->user()->id)->getContent();
+        return \Cart::session(auth()->user()->id)->getContent();
     }
 
     public function count()
