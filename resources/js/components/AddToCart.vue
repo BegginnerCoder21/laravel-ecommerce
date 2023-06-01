@@ -5,16 +5,17 @@
 </template>
 
 <script setup>
+import useProducts from '../composables/products';
+
 const productId = defineProps(['productId']);
+
+const {add } = useProducts();
 
 const ToCart = async () => {
     await axios.get('/sanctum/csrf-cookie');
     await axios.get('api/user')
         .then(async (res) => {
-            let response =await axios.post('api/products', {
-                productId: productId
-            });
-            console.log(response);
+           await add(productId);
 
         })
         .catch(err => console.log(err));
