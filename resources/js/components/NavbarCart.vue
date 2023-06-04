@@ -1,6 +1,6 @@
 <template>
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex mr-10">
-        <a href="#" class="relative">
+        <a href="/shoppingCart" class="relative">
             <span
                 class="absolute -top-1 left-4 rounded-full bg-indigo-700 w-5 h-5 text-xs text-white flex items-center justify-center">{{
                     cartCount }}</span>
@@ -12,7 +12,8 @@
     </div>
 </template>
 
-<script  setup>
+<script setup>
+
 import { onMounted, ref } from 'vue';
 import useProducts from '../composables/products';
 import emitter from 'tiny-emitter/instance';
@@ -27,5 +28,4 @@ onMounted(async () => {
     cartCount.value = await getCount();
 
 })
-
 </script>

@@ -14,7 +14,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cartContent = (new CartRepository())->content();
+
+        return response()->json([
+            'cartContent' => $cartContent
+        ]);
     }
 
     /**

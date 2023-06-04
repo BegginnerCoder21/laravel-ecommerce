@@ -22,7 +22,8 @@ const ToCart = async () => {
     await axios.get('api/user')
     .then(async (res) => {
         let cartCount = await add(productId);
-        emitter.emit('cartCountUpdated', cartCount)
+        emitter.emit('cartCountUpdated', cartCount);
+        toast.success('Produit ajouté au panier.');
         
         
     })
