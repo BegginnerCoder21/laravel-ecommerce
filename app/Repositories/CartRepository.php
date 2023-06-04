@@ -31,4 +31,9 @@ class CartRepository
     {
         return $this->content()->sum('quantity');
     }
+
+    public function somme(){
+
+        return $this->content()->sum('price');
+    }
 }

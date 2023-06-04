@@ -24,10 +24,10 @@ class CartController extends Controller
     {
         $product = Product::where('id', $request->productId)->first();
 
-        $count = (new CartRepository())->add($product);
+        $count = (new CartRepository())->add($product); 
 
         return response()->json([
-            'count' => $count
+            'count' => $count,
         ]);
     }
 
@@ -55,11 +55,12 @@ class CartController extends Controller
         //
     }
 
-    public function count(){
+    public function count()
+    {
         $count = (new CartRepository())->count();
 
         return response()->json([
-            'count' =>$count
+            'count' => $count
         ]);
     }
 }
