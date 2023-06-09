@@ -3,11 +3,13 @@ import { ref } from "vue";
 
 export default function useProducts(){
     const products = ref([]);
+    const cartCount = ref(0);
 
     const getProducts = async() => {
 
         let response = await axios.get('api/products');
-        return products.value = response.data.cartContent;
+        products.value = response.data.cartContent;
+        cartCount.value = response.data.cartCount;
     }
 
     const add = async (productId) => {
@@ -19,14 +21,31 @@ export default function useProducts(){
     }
 
     const getCount = async () => {
-       let response = await axios.get('/api/products/count');
-        return response.data.count;
+        let response = await axios.get('/api/products/count');
+            return response.data.count;
+    }
+
+   const increaseQuantity = async(id) => {
+        await axios.get('/api/products/increase/' + id);
+    }
+
+   const decreaseQuantity = async(id) => {
+        await axios.get('/api/products/decrease/' + id);
+    }
+
+    const destroyProducts = async(id) => {
+
+        await axios.delete('/api/products/' + id);
     }
 
     return {
         add,
         getCount,
         products,
-        getProducts
+        getProducts,
+        increaseQuantity,
+        decreaseQuantity,
+        destroyProducts,
+        cartCount
     }
 }

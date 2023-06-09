@@ -32,8 +32,36 @@ class CartRepository
         return $this->content()->sum('quantity');
     }
 
-    public function somme(){
+    public function increase($id){
+        \Cart::session(auth()->user()->id)->update($id,[
+            'quantity' => +1
+        ]);
 
-        return $this->content()->sum('price');
     }
+
+    public function decrease($id){
+
+        $items = \Cart::session(auth()->user()->id)->get($id);
+
+        if($items->quantity == 1){
+
+            $this->remove($id);
+            return;
+        }
+
+        \Cart::session(auth()->user()->id)->update($id,[
+            'quantity' => -1
+        ]);
+    }
+
+    public function total()
+    {
+        return \Cart::session(auth()->user()->id)->getTotal();
+    }
+
+    public function remove($id){
+
+        \Cart::session(auth()->user()->id)->remove($id);
+    }
+
 }
