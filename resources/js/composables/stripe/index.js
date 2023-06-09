@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import {saveOrders} from '../../helpers'
 
 export default function useStripe (){
 
@@ -34,6 +35,8 @@ export default function useStripe (){
               switch (paymentIntent.status) {
                 case "succeeded":
                   showMessage("Payment succeeded!");
+                  await saveOrders();
+                  window.location = '/merci';
                   break;
                 case "processing":
                   showMessage("Your payment is processing.");

@@ -4,3 +4,8 @@ export const formatPrice = (price) => {
         currency: 'XOF',
     }).format(price/10);
 }
+
+export const saveOrders = async () => {
+
+  await  axios.post('/saveOrders');
+}

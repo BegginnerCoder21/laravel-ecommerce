@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
@@ -26,6 +28,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/checkout',[StripeCheckoutController::class,'create']);
 Route::post('/payementIntent',[StripeCheckoutController::class,'payementIntent']);
+Route::get('merci',fn() => 'merci pour votre commande');
+
+Route::post('/saveOrders',OrderController::class)->name('save.orders');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

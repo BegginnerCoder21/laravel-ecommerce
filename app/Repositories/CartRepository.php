@@ -64,4 +64,9 @@ class CartRepository
         \Cart::session(auth()->user()->id)->remove($id);
     }
 
+    public function clear()
+    {
+        \Cart::session(auth()->user()->id)->clear();
+    }
+
 }
